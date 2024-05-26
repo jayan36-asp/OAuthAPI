@@ -4,6 +4,12 @@
     <TargetFramework>net7.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>df3625e6-e7e5-49cd-92fc-23d32ea29bcb</UserSecretsId>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.19" />
+    <PackageReference Include="Microsoft.AspNetCore.Authorization" Version="8.0.5" />
+  </ItemGroup>
 
 </Project>
