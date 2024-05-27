@@ -21,6 +21,10 @@
             .then(data => {
                 if (data.token) {
                     document.getElementById('result').innerText = 'Login successful! Token: ' + data.token;
+                  
+                    localStorage.setItem('token', data.token);
+
+                    fetchUserInfo(data.token);
                 }
                 else {
                     document.getElementById('result').innerText = 'Login failed!';
@@ -32,3 +36,29 @@
         
     });
 });
+
+
+async function fetchUserInfo(token) {
+        try {
+        const response = await fetch('JWToken/GetUserDetails', {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error('Failed to fetch user info');
+        }
+
+        const userInfo = await response.json();
+
+        document.getElementById('fetchedUsername').innerText = userInfo.username;
+        document.getElementById('fetchedRole').innerText = userInfo.roles.join(', ');
+        document.getElementById('fetchedRegion').innerText = userInfo.regions.join(', ');
+
+        document.getElementById('userInfo').classList.remove('hidden');
+    } catch (error) {
+        alert(error.message);
+    }
+}

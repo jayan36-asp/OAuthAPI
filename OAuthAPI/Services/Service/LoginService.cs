@@ -52,6 +52,10 @@ namespace OAuthAPI.Services.Service
             }
         }
 
+        public UserModel GetUserDetail(string username)
+        {
+            return users.Where(x => x.username.ToLower() == username.ToLower()).Select(x => x).FirstOrDefault();
+        }
         private readonly List<UserModel> users = new List<UserModel>
         {
             new UserModel { username = "Player", password = "player@23", role = "Player", regions = new string[]{ "b_game" } },

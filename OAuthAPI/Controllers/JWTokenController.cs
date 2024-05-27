@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using OAuthAPI.Models;
 using OAuthAPI.Services.Interfaces;
 using OAuthAPI.Services.Service;
@@ -35,7 +36,26 @@ namespace OAuthAPI.Controllers
             }
             return Unauthorized();
         }
-   
+
+        [Authorize]
+        [HttpGet]
+        public IActionResult GetUserDetails()
+        {
+            var username = User.Identity.Name;
+            var user = _loginService.GetUserDetail(username);
+            if (user == null)
+                return Unauthorized();
+
+            var userInfo = new
+            {
+                username = user.username,
+                roles = new[] { user.role },
+                regions = user.regions
+            };
+            return Ok(userInfo);
+        }
+        
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

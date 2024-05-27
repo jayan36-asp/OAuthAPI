@@ -21,9 +21,14 @@
             <button type="submit">Login</button>
         
         </form>
-    
     </div>
 <div id="result" class="result"></div>
+
+<div id="userInfo" class="hidden">
+    <p>Username: <span id="fetchedUsername"></span></p> 
+    <p>Role: <span id="fetchedRole"></span></p>
+    <p>Scope: <span id="fetchedRegion"></span></p>
+</div>
 
 @section Scripts {
     <script src="~/js/login.js"></script>

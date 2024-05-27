@@ -6,5 +6,6 @@ namespace OAuthAPI.Services.Interfaces
     public interface ILoginService
     {
         public loginResponse GenerateJwtToken(LoginRequest request);
+        public UserModel GetUserDetail(string username);
     }
 }
